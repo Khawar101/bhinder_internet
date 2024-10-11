@@ -1,3 +1,5 @@
+import 'package:bhinder_internet/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:bhinder_internet/app/app.bottomsheets.dart';
 import 'package:bhinder_internet/app/app.dialogs.dart';
@@ -10,6 +12,8 @@ Future<void> main() async {
   setupDialogUi();
   setupBottomSheetUi();
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: 
+   DefaultFirebaseOptions.currentPlatform);
   runApp(const MainApp());
 }
 

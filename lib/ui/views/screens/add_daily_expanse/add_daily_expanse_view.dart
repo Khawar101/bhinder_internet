@@ -45,6 +45,17 @@ class AddDailyExpanseView extends StackedView<AddDailyExpanseViewModel> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomText(
+                text: 'Name :',
+                fontSize: mediumFontSize(context),
+                fontWeight: FontWeight.w600,
+              ),
+              verticalSpaceTiny,
+              CustomTextFormField(
+                hintText: 'write your name ',
+                onChanged: viewModel.updateName,
+              ),
+              verticalSpaceMedium,
+              CustomText(
                 text: 'Description for Daily expanse :',
                 fontSize: mediumFontSize(context),
                 fontWeight: FontWeight.w600,
@@ -53,6 +64,7 @@ class AddDailyExpanseView extends StackedView<AddDailyExpanseViewModel> {
               CustomTextFormField(
                 hintText: 'write description',
                 maxLines: 5,
+                onChanged: viewModel.updateDescription,
               ),
               verticalSpaceMedium,
               CustomText(
@@ -64,6 +76,7 @@ class AddDailyExpanseView extends StackedView<AddDailyExpanseViewModel> {
               CustomTextFormField(
                 textInputType: TextInputType.number,
                 hintText: '0',
+                onChanged: viewModel.updatePayment,
               ),
             ],
           ),
@@ -73,7 +86,7 @@ class AddDailyExpanseView extends StackedView<AddDailyExpanseViewModel> {
         padding: const EdgeInsets.only(right: 20, left: 20, bottom: 15),
         child: IconTextContainer(
           height: 50,
-          // onPress: viewModel.addDailyExpanse,
+          onPress: viewModel.addDailyExpanse,
           text: 'Add daily expense',
           textColor: Colors.white,
           boxcolor: Colors.black,

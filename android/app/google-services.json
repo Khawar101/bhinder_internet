@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1081756160975",
+    "project_id": "bhinder-internet",
+    "storage_bucket": "bhinder-internet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1081756160975:android:750360d533af5f802078ba",
+        "android_client_info": {
+          "package_name": "com.example.bhinder_internet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPSlkoAuPxu50MTmiGmVGzxZNR8wEi54Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
