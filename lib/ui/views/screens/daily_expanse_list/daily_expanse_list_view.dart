@@ -36,14 +36,14 @@ class DailyExpanseListView extends StackedView<DailyExpanseListViewModel> {
           fontSize: extraMediumFontSize(context),
         ),
         actions: [
-          // IconButton(
-          //   icon: const Icon(Icons.download),
-          //   onPressed: () {
-          //     DateTime selectedMonthAsDate =
-          //         DateFormat('MMMM yyyy').parse(viewModel.selectedMonth);
-          //     viewModel.exportToExcel(selectedMonthAsDate);
-          //   },
-          // ),
+          IconButton(
+            icon: const Icon(Icons.download),
+            onPressed: () {
+              DateTime selectedMonthAsDate =
+                  DateFormat('MMMM yyyy').parse(viewModel.selectedMonth);
+              viewModel.exportToExcel(selectedMonthAsDate);
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.save), // Save icon
             onPressed: () async {
