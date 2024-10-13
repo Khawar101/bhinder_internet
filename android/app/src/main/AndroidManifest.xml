@@ -12,7 +12,7 @@
 
 
     <application
-        android:label="bhinder_internet"
+        android:label="Bhinder Net"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

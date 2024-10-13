@@ -36,16 +36,16 @@ class DailyExpanseListView extends StackedView<DailyExpanseListViewModel> {
           fontSize: extraMediumFontSize(context),
         ),
         actions: [
+          // IconButton(
+          //   icon: const Icon(Icons.download),
+          //   onPressed: () {
+          //     DateTime selectedMonthAsDate =
+          //         DateFormat('MMMM yyyy').parse(viewModel.selectedMonth);
+          //     viewModel.exportToExcel(selectedMonthAsDate);
+          //   },
+          // ),
           IconButton(
-            icon: Icon(Icons.download),
-            onPressed: () {
-              DateTime selectedMonthAsDate =
-                  DateFormat('MMMM yyyy').parse(viewModel.selectedMonth);
-              viewModel.exportToExcel(selectedMonthAsDate);
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.save), // Save icon
+            icon: const Icon(Icons.save), // Save icon
             onPressed: () async {
               // Request storage permission
               if (await Permission.storage.request().isGranted) {
@@ -56,8 +56,9 @@ class DailyExpanseListView extends StackedView<DailyExpanseListViewModel> {
               } else {
                 // Handle the case where permission is denied
                 // Show a message to the user
+                // ignore: use_build_context_synchronously
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
+                  const SnackBar(
                       content: Text(
                           'Storage permission is required to save the Excel file.')),
                 );
@@ -75,42 +76,70 @@ class DailyExpanseListView extends StackedView<DailyExpanseListViewModel> {
                   padding: const EdgeInsets.only(bottom: 20),
                   itemBuilder: (context, index) {
                     final expense = viewModel.expenses[index];
-                    return Card(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 8),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10.0, vertical: 10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  SizedBox(
-                                      width: width * 0.4,
-                                      child: CustomText(
-                                          maxLines: 1,
-                                          textOverflow: TextOverflow.ellipsis,
-                                          text: expense.name,
-                                          fontSize: mediumFontSize(context),
-                                          fontWeight: FontWeight.w600)),
-                                  CustomText(
-                                      color: Colors.green,
-                                      text: viewModel.formatDate(
-                                        expense.dateTime,
-                                      )),
-                                  CustomText(text: 'Rs:${expense.amount}'),
-                                ],
-                              ),
-                              verticalSpace(5),
-                              CustomText(
-                                text: expense.description,
-                              )
-                            ],
+                    return GestureDetector(
+                      onLongPress: (){
+                         showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: const Text('Delete Expense'),
+                        content: Text('Are you sure you want to delete "${expense.description}"?'),
+                        actions: [
+                          TextButton(
+                            child: const Text('Cancel'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
                           ),
-                        ));
+                          TextButton(
+                            child: const Text('Delete'),
+                            onPressed: () {
+                              viewModel.deleteExpense(index); // Call delete method
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                      },
+                      child: Card(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 8),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                        width: width * 0.4,
+                                        child: CustomText(
+                                            maxLines: 1,
+                                            textOverflow: TextOverflow.ellipsis,
+                                            text: expense.name,
+                                            fontSize: mediumFontSize(context),
+                                            fontWeight: FontWeight.w600)),
+                                    CustomText(
+                                        color: Colors.green,
+                                        text: viewModel.formatDate(
+                                          expense.dateTime,
+                                        )),
+                                    CustomText(text: 'Rs:${expense.amount}'),
+                                  ],
+                                ),
+                                verticalSpace(5),
+                                CustomText(
+                                  text: expense.description,
+                                )
+                              ],
+                            ),
+                          )),
+                    );
                   },
                 ),
       bottomNavigationBar: Padding(

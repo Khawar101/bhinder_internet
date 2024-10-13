@@ -19,6 +19,7 @@ class AddUserDataView extends StackedView<AddUserDataViewModel> {
   ) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: whitePrimaryColor,
       appBar: AppBar(
@@ -52,7 +53,19 @@ class AddUserDataView extends StackedView<AddUserDataViewModel> {
               ),
               verticalSpaceTiny,
               CustomTextFormField(
-                hintText: 'write description',
+                hintText: 'Write user name',
+                onChanged: (value) => viewModel.userName = value, // Capture input
+              ),
+              verticalSpaceMedium,
+              CustomText(
+                text: 'User Speed :',
+                fontSize: mediumFontSize(context),
+                fontWeight: FontWeight.w600,
+              ),
+              verticalSpaceTiny,
+              CustomTextFormField(
+                hintText: '00 MB',
+                onChanged: (value) => viewModel.internetSpeed = value, // Capture input
               ),
               verticalSpaceMedium,
               CustomText(
@@ -63,7 +76,8 @@ class AddUserDataView extends StackedView<AddUserDataViewModel> {
               verticalSpaceTiny,
               CustomTextFormField(
                 textInputType: TextInputType.number,
-                hintText: '0',
+                hintText: '0000',
+                onChanged: (value) => viewModel.payment = value, // Capture input
               ),
               verticalSpaceMedium,
               Row(
@@ -96,7 +110,7 @@ class AddUserDataView extends StackedView<AddUserDataViewModel> {
                         ? Colors.black
                         : Colors.white, // Dynamic background
                     onPress: () {
-                      viewModel.togglePaymentSelection(false); // Set to Paid
+                      viewModel.togglePaymentSelection(false); // Set to UnPaid
                     },
                   )
                 ],
@@ -109,7 +123,7 @@ class AddUserDataView extends StackedView<AddUserDataViewModel> {
         padding: const EdgeInsets.only(right: 20, left: 20, bottom: 15),
         child: IconTextContainer(
           height: 50,
-          // onPress: viewModel.addDailyExpanse,
+          onPress: viewModel.addUserData, // Call addUserData method
           text: 'Add User',
           textColor: Colors.white,
           boxcolor: Colors.black,
